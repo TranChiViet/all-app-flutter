@@ -29,92 +29,132 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Container(
-          width: 300,
-          height: 300,
-          padding: const EdgeInsets.only(left: 10, bottom: 24),
-          decoration: BoxDecoration(
-            shape: BoxShape.rectangle,
-            // borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: Colors.black, width: 1),
-            image: DecorationImage(
-              fit: BoxFit.fill,
-              image: AssetImage('assets/images/image1.png'),
+      body: Column(
+        children: [
+          Container(
+            height: 60,
+            width: 60,
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              // border: Border.all(color: Colors.black, width: 1),
+              image: DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage('assets/images/image1.png'),
+              ),
             ),
           ),
-        ),
+          const CircleAvatar(
+            radius: 30,
+            foregroundImage: AssetImage('assets/images/image1.png'),
+          ),
+          Container(
+            height: 60,
+            width: 60,
+            decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.circular(14),
+              // border: Border.all(color: Colors.black, width: 1),
+              image: const DecorationImage(
+                fit: BoxFit.fill,
+                image: AssetImage('assets/images/image1.png'),
+              ),
+            ),
+          ),
+          Container(
+            height: 60,
+            width: 60,
+            decoration: BoxDecoration(
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.circular(14),
+              // border: Border.all(color: Colors.black, width: 1),
+              image: const DecorationImage(
+                fit: BoxFit.cover,
+                image: NetworkImage('https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80'),
+              ),
+            ),
+          ),
+          Container(
+              height: 60,
+              width: 60,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.blue,
+                image: null,
+              ),
+              child: Center(
+                child: Text(
+                  StringHelper.createNameKey('Chi Viet'),
+                ),
+              )),
+        ],
       ),
-      
     );
   }
 }
 
-
-const double extraSmallAvatarSize = 20;
-const double smallAvatarSize = 24;
-const double mediumAvatarSize = 32;
-const double largeAvatarSize = 44;
-const double extraLargeAvatarSize = 80;
-class AvatarWidget {
-  static Widget base({
-    Image? image,
-    String? imagePath,
-    double? size,
-    String name = "",
-    bool isBorder = false,
-  }) {
-    final finalSize = size ?? largeAvatarSize;
-    return Container(
-        height: finalSize,
-        width: finalSize,
-        padding: EdgeInsets.all(isBorder ? (finalSize ~/ 30).toDouble() : 0),
-        decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: isBorder ? Border.all(color: BaseColor.blue300) : null),
-        child: (image != null)
-            ? CircleAvatar(
-                radius: extraLargeAvatarSize,
-                foregroundImage: image.image,
-                backgroundColor: Colors.white,
-              )
-            : Stack(
-                alignment: Alignment.center,
-                children: [
-                  Container(
-                      height: finalSize,
-                      width: finalSize,
-                      alignment: Alignment.center,
-                      decoration: const BoxDecoration(
-                          shape: BoxShape.circle, color: BaseColor.grey40),
-                      child: Text(StringHelper.createNameKey(name),
-                          style: BaseTextStyle.label()
-                              .copyWith(fontSize: finalSize / 3))),
-                  if (imagePath != null)
-                    Container(
-                      height: finalSize,
-                      width: finalSize,
-                      padding: const EdgeInsets.all(1),
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
-                          border: Border.all(color: BaseColor.grey40)),
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.circular(finalSize),
-                          child: Image.network(imagePath, fit: BoxFit.cover)),
-                    ),
-                ],
-              ));
-  }
-}
+// const double extraSmallAvatarSize = 20;
+// const double smallAvatarSize = 24;
+// const double mediumAvatarSize = 32;
+// const double largeAvatarSize = 44;
+// const double extraLargeAvatarSize = 80;
+// class AvatarWidget {
+//   static Widget base({
+//     Image? image,
+//     String? imagePath,
+//     double? size,
+//     String name = "",
+//     bool isBorder = false,
+//   }) {
+//     final finalSize = size ?? largeAvatarSize;
+//     return Container(
+//         height: finalSize,
+//         width: finalSize,
+//         padding: EdgeInsets.all(isBorder ? (finalSize ~/ 30).toDouble() : 0),
+//         decoration: BoxDecoration(
+//             shape: BoxShape.circle,
+//             border: isBorder ? Border.all(color: BaseColor.blue300) : null),
+//         child: (image != null)
+//             ? CircleAvatar(
+//                 radius: extraLargeAvatarSize,
+//                 foregroundImage: image.image,
+//                 backgroundColor: Colors.white,
+//               )
+//             : Stack(
+//                 alignment: Alignment.center,
+//                 children: [
+//                   Container(
+//                       height: finalSize,
+//                       width: finalSize,
+//                       alignment: Alignment.center,
+//                       decoration: const BoxDecoration(
+//                           shape: BoxShape.circle, color: BaseColor.grey40),
+//                       child: Text(StringHelper.createNameKey(name),
+//                           style: BaseTextStyle.label()
+//                               .copyWith(fontSize: finalSize / 3))),
+//                   if (imagePath != null)
+//                     Container(
+//                       height: finalSize,
+//                       width: finalSize,
+//                       padding: const EdgeInsets.all(1),
+//                       decoration: BoxDecoration(
+//                           shape: BoxShape.circle,
+//                           color: Colors.white,
+//                           border: Border.all(color: BaseColor.grey40)),
+//                       child: ClipRRect(
+//                           borderRadius: BorderRadius.circular(finalSize),
+//                           child: Image.network(imagePath, fit: BoxFit.cover)),
+//                     ),
+//                 ],
+//               ));
+//   }
+// }
 
 class StringHelper {
   static String createNameKey(String name) {
