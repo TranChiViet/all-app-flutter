@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ui_movie_ticket/screens/check_out.dart';
 
 import 'config/config_export.dart';
 import 'screens/home.dart';
@@ -31,9 +32,10 @@ class MyApp extends StatelessWidget {
             ),
       ),
       home: const 
-      // HomeScreen(),
+      HomeScreen(),
       // SelectCinemaScreen(),
-      SelectSeatScreen()
+      // SelectSeatScreen(),
+      // CheckOutScreen()
     );
   }
 }
