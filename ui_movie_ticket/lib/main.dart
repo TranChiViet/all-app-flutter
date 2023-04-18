@@ -31,9 +31,9 @@ class MyApp extends StatelessWidget {
             ),
       ),
       home: const 
-      // HomeScreen(),
+      HomeScreen(),
       // SelectCinemaScreen(),
-      SelectSeatScreen()
+      // SelectSeatScreen()
     );
   }
 }
