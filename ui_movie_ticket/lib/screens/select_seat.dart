@@ -3,6 +3,7 @@ import 'package:ui_movie_ticket/config/config_export.dart';
 import 'package:ui_movie_ticket/constants/constants_export.dart';
 import 'package:ui_movie_ticket/model/movie.dart';
 import '../widgets/common/export.dart';
+import 'check_out.dart';
 
 class SelectSeatScreen extends StatelessWidget {
   const SelectSeatScreen({super.key});
@@ -11,98 +12,107 @@ class SelectSeatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Column(
-        children: [
-          const Header(title: 'Ralp Breaks The Internet'),
-          Container(
-            margin: const EdgeInsets.only(top: 4, left: 24),
-            child: const Text(
-              'FX Sudirman XXI',
-              style: TxtStyle.heading3Light,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 24.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _buildStatusSeat(
-                    color: DarkTheme.darkBackground, title: 'Available'),
-                _buildStatusSeat(
-                    color: DarkTheme.greyBackground, title: 'Booked'),
-                _buildStatusSeat(color: DarkTheme.blueMain, title: 'Your Seat'),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
+          child: SizedBox(
+            height: size.height,
+            child: SingleChildScrollView(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: seatRow
-                    .map((seat) => Builder(builder: (context) {
-                          return Row(
-                            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: seatNumber.map((number) {
-                              return SeatButton(
-                                child: Text(
-                                  seat + number,
-                                  style: TxtStyle.heading3Medium,
-                                ),
-                              );
-                            }).toList(),
-                          );
-                        }))
-                    .toList(),
+                    children: [
+              const Header(title: 'Ralp Breaks The Internet'),
+              Container(
+                margin: const EdgeInsets.only(top: 4, left: 24),
+                child: const Text(
+                  'FX Sudirman XXI',
+                  style: TxtStyle.heading3Light,
+                ),
               ),
-            ),
-          ),
-          Container(
-            alignment: Alignment.center,
-            child: const Text(
-              'Screen',
-              style: TxtStyle.heading4,
-            ),
-          ),
-          Image.asset(AssetPath.screenx2),
-          Padding(
-            padding: const EdgeInsets.only(left: 24, right: 24, bottom: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
-                      'Total Price',
-                      style: TxtStyle.heading4
-                    ),
-                    Text(
-                      '150.000 VND',
-                      style: TxtStyle.heading3Medium,
-                    ),
+              Padding(
+                padding: const EdgeInsets.only(top: 24.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    _buildStatusSeat(
+                        color: DarkTheme.darkBackground, title: 'Available'),
+                    _buildStatusSeat(
+                        color: DarkTheme.greyBackground, title: 'Booked'),
+                    _buildStatusSeat(color: DarkTheme.blueMain, title: 'Your Seat'),
                   ],
                 ),
-                GestureDetector(
-                  onTap: (){},
-                  child: Container(
-                    height: size.height / 16,
-                    width: size.width / 3,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        color: DarkTheme.blueMain,
-                        borderRadius: BorderRadius.circular(16)),
-                    child: const Text(
-                      'Book Ticket',
-                      style: TxtStyle.heading3Medium,
-                    ),
+              ),
+              Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: seatRow
+                        .map((seat) => Builder(builder: (context) {
+                              return Row(
+                                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: seatNumber.map((number) {
+                                  return SeatButton(
+                                    child: Text(
+                                      seat + number,
+                                      style: TxtStyle.heading3Medium,
+                                    ),
+                                  );
+                                }).toList(),
+                              );
+                            }))
+                        .toList(),
                   ),
-                )
-              ],
+                ),
+              
+              Container(
+                alignment: Alignment.center,
+                child: const Text(
+                  'Screen',
+                  style: TxtStyle.heading4,
+                ),
+              ),
+              Image.asset(AssetPath.screenx2),
+              Padding(
+                padding: const EdgeInsets.only(left: 24, right: 24, bottom: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          'Total Price',
+                          style: TxtStyle.heading4
+                        ),
+                        Text(
+                          '150.000 VND',
+                          style: TxtStyle.heading3Medium,
+                        ),
+                      ],
+                    ),
+                    GestureDetector(
+                      onTap: (){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const CheckOutScreen()));
+                      },
+                      child: Container(
+                        height: size.height / 16,
+                        width: size.width / 3,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: DarkTheme.blueMain,
+                            borderRadius: BorderRadius.circular(16)),
+                        child: const Text(
+                          'Book Ticket',
+                          style: TxtStyle.heading3Medium,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              )
+                    ],
+                  ),
             ),
-          )
-        ],
-      )),
+          )),
     );
   }
 
@@ -142,12 +152,11 @@ class _SeatButtonState extends State<SeatButton> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      padding: const EdgeInsets.all( 8.0),
       child: SizedBox(
-        height: 48,
-        width: 48,
-        child: Expanded(
-            child: GestureDetector(
+        height: 40,
+        width: 40,
+        child: GestureDetector(
           onTap: () {
             setState(() {
               _ticketStates = _ticketStates == TicketStates.idle
@@ -164,7 +173,7 @@ class _SeatButtonState extends State<SeatButton> {
                 borderRadius: BorderRadius.circular(14)),
             child: widget.child,
           ),
-        )),
+        )
       ),
     );
   }
