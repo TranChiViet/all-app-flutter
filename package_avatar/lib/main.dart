@@ -42,7 +42,9 @@ class _MyHomePageState extends State<MyHomePage> {
           width: 300,
           height: 300,
           padding: const EdgeInsets.only(left: 10, bottom: 24),
-          decoration: BoxDecoration(
+          decoration:
+          
+           BoxDecoration(
             shape: BoxShape.rectangle,
             // borderRadius: BorderRadius.circular(14),
             border: Border.all(color: Colors.black, width: 1),
