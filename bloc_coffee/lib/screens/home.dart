@@ -1,4 +1,5 @@
 import 'package:bloc_coffee/models/item.dart';
+import 'package:bloc_coffee/widgets/item_home.dart';
 import 'package:flutter/material.dart';
 
 import '../config/config_export.dart';
@@ -82,44 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemCount: listItem.length,
                       itemBuilder: (context, index) {
                         Item item = listItem[index];
-                        return Container(
-                          decoration: BoxDecoration(
-                              color: Colors.transparent.withOpacity(0.2),
-                              border: Border.all(color: Colors.black, width: 1),
-                              borderRadius: BorderRadius.circular(16)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Column(
-                              children: [
-                                Image.asset(item.image),
-                                Text(
-                                  item.name,
-                                  style: const TextStyle(color: Colors.white),
-                                ),
-                                Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.transparent,
-                                        borderRadius:
-                                            BorderRadius.circular(16)),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text('₹ ${item.price.toString()}', style: const TextStyle(color: Colors.white),),
-                                        SizedBox(
-                                          height: 30,
-                                          width: 30,
-                                          child: const ImageIcon(
-                                AssetImage(AssetPath.iconIncrease),
-                              ),
-                                          
-                                          
-                                        )
-                                      ],
-                                    )),
-                              ],
-                            ),
-                          ),
-                        );
+                        return ItemHome(item: item,);
                       },
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(

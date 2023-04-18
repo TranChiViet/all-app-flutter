@@ -6,6 +6,7 @@ class ColorApp {
   static const black = Color(0xff171017);
   static const brown = Color(0xff704341);
   static const cfMilk = Color(0xffEFE3C8);
+  static const blckSecond = Color(0xff414141);
 
 
 
