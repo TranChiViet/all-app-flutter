@@ -18,42 +18,16 @@ class ItemHome extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Stack(children: [
-                Image.asset(item.image),
-                Row(
-                  children: [
-                    Container(
-                      decoration:  const BoxDecoration(
-                        image: DecorationImage(
-                          fit: BoxFit.fill,
-                          image: AssetImage('assets/images/iconStar.png'),)
-                      ),
-                    ),
-                    
-                    Container(
-                      decoration: BoxDecoration(
-                  color: ColorApp.blckSecond.withOpacity(0.5),
-                  borderRadius: const BorderRadius.only(
-                    bottomRight: Radius.circular(16),
-                    topLeft: Radius.circular(16),
-                  )),
-                      child: const Text(
-                        '4.5',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    )
-                  ],
-                ),
-              ]),
-            
+            _buildImage(),
             Text(
               item.name,
               style: const TextStyle(color: Colors.white),
             ),
             Container(
-                height: 50,
-                width: 130,
+                height: size.height / 20,
+                width: size.width / 4,
                 decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.08),
                     borderRadius: BorderRadius.circular(16)),
@@ -68,8 +42,8 @@ class ItemHome extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      height: 50,
-                      width: 50,
+                      height: size.height / 15,
+                      width: size.height / 20,
                       decoration: BoxDecoration(
                           color: ColorApp.cfMilk,
                           borderRadius: BorderRadius.circular(16)),
@@ -83,5 +57,42 @@ class ItemHome extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Stack _buildImage() {
+    return Stack(
+              // alignment: Alignment.topLeft,
+              children: [
+                Image.asset(item.image),
+                Row(
+                  children: [
+                    Container(
+                      decoration: const BoxDecoration(
+                          image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: AssetImage('assets/images/iconStar.png'),
+                      )),
+                    ),
+                    Positioned(
+                      top: 2,
+                      left: 10,
+                      child: Container(
+                        height: size.height / 50,
+                        width: width / 10,
+                        decoration: const BoxDecoration(
+                            color: ColorApp.blckSecond,
+                            borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(16),
+                              topLeft: Radius.circular(16),
+                            )),
+                        child: const Text(
+                          '4.5',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ]);
   }
 }
