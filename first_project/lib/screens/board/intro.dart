@@ -9,7 +9,8 @@ import '../../widgets/image_logo.dart';
 import '../../widgets/otp_base.dart';
 import '../../widgets/text_button_base.dart';
 import '../../widgets/text_field_base.dart';
-import '../login/sign_in.dart';
+import '../sign_in/sign_in_page.dart';
+
 
 class IntroScreen extends StatefulWidget {
   const IntroScreen({super.key});
@@ -94,7 +95,7 @@ class _IntroScreenState extends State<IntroScreen> {
                 enableColor: false,
                 onPressed: () {
                   Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => SignInScreen()));
+                      MaterialPageRoute(builder: (context) => SignInPage()));
                 }),
           ),
           Expanded(
@@ -133,7 +134,7 @@ class _IntroScreenState extends State<IntroScreen> {
                         : Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SignInScreen()));
+                                builder: (context) => SignInPage()));
                   });
                 }),
           ),

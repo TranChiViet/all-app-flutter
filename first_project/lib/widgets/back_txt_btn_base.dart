@@ -1,7 +1,9 @@
 import 'package:first_project/constant/constant_export.dart';
 import 'package:flutter/material.dart';
 
-import '../screens/login/sign_in.dart';
+import '../screens/sign_in/sign_in_page.dart';
+
+
 
 class BackTextButtonBase extends StatelessWidget {
 
@@ -14,7 +16,7 @@ class BackTextButtonBase extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> SignInScreen()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> SignInPage()));
       },
       child: SizedBox(
         width: 150,
