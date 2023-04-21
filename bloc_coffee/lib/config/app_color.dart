@@ -7,7 +7,9 @@ class ColorApp {
   static const brown = Color(0xff704341);
   static const cfMilk = Color(0xffEFE3C8);
   static const blckSecond = Color(0xff414141);
-
+  static const white = Color(0xFFFFFFFF);
+  static const blckThird = Color(0xFF4A2B29);
+  static const blckFourth = Color(0xFF362C36);
 
 
 
@@ -15,7 +17,6 @@ class ColorApp {
   static const blueMain = Color(0xFF3D58F8);
   static const blueIllustration = Color(0xFF2C4BA1);
   static const darkBlueIllustration = Color(0xFF1E3577);
-  static const white = Color(0xFFFFFFFF);
   static const greyBackground = Color(0xFF42476A);
   static const darkGrey = Color(0xFF42476A);
   

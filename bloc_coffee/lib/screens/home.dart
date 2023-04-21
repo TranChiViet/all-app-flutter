@@ -13,7 +13,8 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   List<String> topicItem = [
     'Flat White',
     'Espresso',
@@ -22,121 +23,107 @@ class _HomeScreenState extends State<HomeScreen> {
     'Cappuccino'
   ];
 
-  int selectedIndex = 4;
+  late final TabController controller =
+      TabController(length: topicItem.length, vsync: this);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        const Header(),
-        const SearchBar(),
-        Expanded(
-          child: Container(
-            height: size.height / 2,
-            // color: Colors.blue,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: RotatedBox(
-                    quarterTurns: 3,
-                    child: CustomPaint(
-                      size: Size(size.height * 0.53, 100),
-                      painter: RPSCustomPainter(),
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+              child: Column(
+                children: const [
+                  Header(),
+                  SearchBar(),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: Row(
+                  children: [
+                    RotatedBox(
+                      quarterTurns: 3,
                       child: Container(
-                        // height: 100,
-                        // margin: EdgeInsets.symmetric(vertical: 10),
-                        width: size.height * 0.5,
-                        child: SingleChildScrollView(
-                          child: Row(
-                            children: List.generate(5, (index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    selectedIndex = index;
-                                  });
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(7.0),
-                                  child: Text(
-                                    topicItem[index],
-                                    style: selectedIndex == index
-                                        ? TxtStyle().txt_16_cfMilk
-                                        : TxtStyle().txt_14_cfMilk50,
-                                  ),
-                                ),
-                              );
-                            }).toList(),
-                          ),
+                        height: 50,
+                        decoration: const BoxDecoration(
+                          color: ColorApp.brown,
+                          borderRadius: BorderRadius.only(
+                              bottomRight: Radius.circular(35)),
                         ),
+                        child: TabBar(
+                            controller: controller,
+                            indicatorColor: Colors.transparent,
+                            labelColor: ColorApp.cfMilk,
+                            labelPadding: EdgeInsets.zero,
+                            unselectedLabelColor:
+                                ColorApp.cfMilk.withOpacity(0.5),
+                            overlayColor:
+                                MaterialStateProperty.all(Colors.transparent),
+                            tabs: topicItem
+                                .map((e) => Text(
+                                      e,
+                                      style: const TextStyle(fontSize: 14),
+                                    ))
+                                .toList()),
                       ),
                     ),
-                  ),
-                ),
-                Expanded(
-                  flex: 9,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: GridView.builder(
-                      itemCount: listItem.length,
-                      itemBuilder: (context, index) {
-                        Item item = listItem[index];
-                        return ItemHome(item: item,);
-                      },
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              mainAxisSpacing: 20,
-                              crossAxisSpacing: 20,
-                              childAspectRatio: 9/16,
-                              mainAxisExtent: 230),
+                    Expanded(
+                      child: Container(
+                          child: TabBarView(controller: controller, children: [
+                        const CappuccinoTab(),
+                        Container(
+                          child: const Center(child: Text('Espresso')),
+                        ),
+                        Container(
+                          child: const Center(child: Text('Americano')),
+                        ),
+                        Container(
+                          child: const Center(child: Text('Latte')),
+                        ),
+                        Container(
+                          child: const Center(child: Text('Cappuccino')),
+                        ),
+                      ])),
                     ),
-                  ),
-                )
-              ],
+                  ],
+                ),
+              ),
             ),
-          ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }
 
-class RPSCustomPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    double w = size.width;
-    double h = size.height;
-    double r = 40;
-    Paint paint0 = Paint()
-      ..color = ColorApp.brown
-      ..style = PaintingStyle.fill
-      ..strokeWidth = 1.0;
-
-    Path path0 = Path();
-    path0.lineTo(0, h);
-    path0.lineTo(w - r, h);
-    path0.quadraticBezierTo(w, h, w, h - r);
-    path0.lineTo(0, 0);
-
-    path0.close();
-
-    // canvas.drawShadow(path0.shift(const Offset(0, 5)),
-    //     ColorApp.colorButtonBlue.withOpacity(0.3), 2.0, true);
-    // canvas.drawShadow(path0.shift(const Offset(0, -3)),
-    //     ColorApp.colorButtonBlue.withOpacity(0.3), 1.0, true);
-    // canvas.drawShadow(path0.shift(const Offset(1, 0)),
-    //     ColorApp.colorButtonBlue.withOpacity(0.3), 1.0, true);
-    // canvas.drawShadow(path0.shift(const Offset(-1, 0)),
-    //     ColorApp.colorButtonBlue.withOpacity(0.3), 1.0, true);
-
-    canvas.drawPath(path0, paint0);
-  }
+class CappuccinoTab extends StatelessWidget {
+  const CappuccinoTab({super.key});
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: GridView.builder(
+        itemCount: listItem.length,
+        itemBuilder: (context, index) {
+          Item item = listItem[index];
+          return ItemHome(
+            item: item,
+          );
+        },
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 12,
+          crossAxisSpacing: 12,
+          // childAspectRatio: 3 / 5,
+          mainAxisExtent: 230,
+        ),
+      ),
+    );
   }
 }

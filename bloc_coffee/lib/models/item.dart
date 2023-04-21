@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bloc_coffee/config/asset_path.dart';
 
+enum CoffeType { FlatWhite, Espresso, Americano, Latte, Cappuccino }
+
 class Item {
   final String id;
   final String image;
@@ -16,9 +18,29 @@ class Item {
 
 List<Item> listItem = [
   Item(id: '1', image: AssetPath.cocoa, name: 'Cinnamon & Cocoa', price: 99),
-  Item(id: '2', image: AssetPath.drizzled, name: 'Drizzeled with Caramel', price: 199),
+  Item(
+      id: '2',
+      image: AssetPath.drizzled,
+      name: 'Drizzeled with Caramel',
+      price: 199),
   Item(id: '3', image: AssetPath.burst, name: 'Bursting Blueberry', price: 249),
   Item(id: '4', image: AssetPath.burst, name: 'Bursting Blueberry', price: 249),
   Item(id: '5', image: AssetPath.cocoa, name: 'Milk Coffee', price: 49),
   Item(id: '6', image: AssetPath.drizzled, name: 'Milk Foam', price: 199),
+];
+
+
+List<Map<String, dynamic>> choiceMilk = [
+  {
+    'name': 'Oalk Milk',
+    'selected': true,
+  },
+  {
+    'name': 'Soy Milk',
+    'selected': false,
+  },
+  {
+    'name': 'Olmond Milk',
+    'selected': false,
+  }
 ];
