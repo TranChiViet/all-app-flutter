@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'bloc/item_bloc.dart';
 import 'config/config_export.dart';
 import 'screens/tab.dart';
 
@@ -12,13 +14,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: ColorApp.darkBackground,
+    return BlocProvider(
+      create: (context) => ItemBloc(),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          // primarySwatch: Colors.blue,
+          scaffoldBackgroundColor: ColorApp.darkBackground,
+        ),
+        home: TabScreen(),
       ),
-      home: TabScreen(),
     );
   }
 }

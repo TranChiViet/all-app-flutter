@@ -1,7 +1,10 @@
 import 'package:bloc_coffee/config/config_export.dart';
 import 'package:bloc_coffee/widgets/item_cart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
+import '../bloc/item_bloc.dart';
 import '../models/item.dart';
 
 class CartScreen extends StatelessWidget {
@@ -13,7 +16,6 @@ class CartScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        
         children: [
           Text(
             'Cart',
@@ -21,11 +23,16 @@ class CartScreen extends StatelessWidget {
           ),
           Expanded(
             flex: 5,
-            child: ListView.builder(
-              itemCount: listItem.length,
-              itemBuilder: (context, index) {
-                Item item = listItem[index];
-                return ItemCart(item: item);
+            child: BlocBuilder<ItemBloc, ItemState>(
+              builder: (context, state) {
+                List<Item> listItems = state.cartItems;
+                return ListView.builder(
+                  itemCount: listItems.length,
+                  itemBuilder: (context, index) {
+                    Item item = listItems[index];
+                    return ItemCart(item: item);
+                  },
+                );
               },
             ),
           ),

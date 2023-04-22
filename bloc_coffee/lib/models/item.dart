@@ -1,19 +1,78 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
+
+import 'package:equatable/equatable.dart';
+
 import 'package:bloc_coffee/config/asset_path.dart';
 
 enum CoffeType { FlatWhite, Espresso, Americano, Latte, Cappuccino }
-
-class Item {
+enum ActionSlidable {delete, favorite, share}
+class Item extends Equatable {
   final String id;
   final String image;
   final String name;
   final int price;
+  bool? isFavorite;
+
   Item({
     required this.id,
     required this.image,
     required this.name,
     required this.price,
-  });
+    this.isFavorite,
+  }){
+    isFavorite = isFavorite ?? false;
+  }
+
+  Item copyWith({
+    String? id,
+    String? image,
+    String? name,
+    int? price,
+    bool? isFavorite,
+  }) {
+    return Item(
+      id: id ?? this.id,
+      image: image ?? this.image,
+      name: name ?? this.name,
+      price: price ?? this.price,
+      isFavorite: isFavorite ?? this.isFavorite,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'image': image,
+      'name': name,
+      'price': price,
+      'isFavorite': isFavorite,
+    };
+  }
+
+  factory Item.fromMap(Map<String, dynamic> map) {
+    return Item(
+      id: map['id'] as String,
+      image: map['image'] as String,
+      name: map['name'] as String,
+      price: map['price'] as int,
+      isFavorite: map['isFavorite'],
+    );
+  }
+  
+  @override
+  // TODO: implement props
+  List<Object?> get props {
+    return [
+      id,
+      image,
+      name,
+      price,
+      isFavorite,
+    ];
+  }
+
+
 }
 
 List<Item> listItem = [

@@ -1,7 +1,9 @@
 import 'package:bloc_coffee/models/item.dart';
 import 'package:bloc_coffee/widgets/item_home.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../bloc/item_bloc.dart';
 import '../config/config_export.dart';
 import '../widgets/header.dart';
 import '../widgets/search_bar.dart';
@@ -108,21 +110,27 @@ class CappuccinoTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: GridView.builder(
-        itemCount: listItem.length,
-        itemBuilder: (context, index) {
-          Item item = listItem[index];
-          return ItemHome(
-            item: item,
+      child: BlocBuilder<ItemBloc, ItemState>(
+        builder: (context, state) {
+          List<Item> listItems = state.homeItems;
+          listItems = listItem;
+          return GridView.builder(
+            itemCount: listItems.length,
+            itemBuilder: (context, index) {
+              Item item = listItems[index];
+              return ItemHome(
+                item: item,
+              );
+            },
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 12,
+              crossAxisSpacing: 12,
+              // childAspectRatio: 3 / 5,
+              mainAxisExtent: 230,
+            ),
           );
         },
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 12,
-          crossAxisSpacing: 12,
-          // childAspectRatio: 3 / 5,
-          mainAxisExtent: 230,
-        ),
       ),
     );
   }

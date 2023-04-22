@@ -6,8 +6,8 @@ import '../bloc/item_bloc.dart';
 import '../config/config_export.dart';
 import '../models/item.dart';
 
-class ItemHome extends StatelessWidget {
-  const ItemHome({super.key, required this.item});
+class ItemFavorite extends StatelessWidget {
+  const ItemFavorite({super.key, required this.item});
 
   final Item item;
 
@@ -29,38 +29,29 @@ class ItemHome extends StatelessWidget {
               item.name,
               style: const TextStyle(color: Colors.white),
             ),
-            Container(
+            GestureDetector(
+              onTap: () {
+                context.read<ItemBloc>().add(Favorite(item: item));
+              },
+              child: Container(
                 height: 50,
+                width: 50,
                 decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.08),
+                    color: ColorApp.cfMilk,
                     borderRadius: BorderRadius.circular(16)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Text(
-                        '₹ ${item.price.toString()}',
-                        style: TxtStyle().txt_14_white,
-                        textAlign: TextAlign.center,
+                child: item.isFavorite == false
+                    ? const Icon(
+                        Icons.favorite_outline,
+                        size: 30,
+                        color: Colors.white,
+                      )
+                    : const Icon(
+                        Icons.favorite,
+                        size: 30,
+                        color: Colors.red,
                       ),
-                    ),
-                    GestureDetector(
-                      onTap: (){
-                        context.read<ItemBloc>().add(AddItem(item: item));
-                      },
-                      child: Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                            color: ColorApp.cfMilk,
-                            borderRadius: BorderRadius.circular(16)),
-                        child: const ImageIcon(
-                          AssetImage(AssetPath.iconIncrease),
-                        ),
-                      ),
-                    )
-                  ],
-                )),
+              ),
+            )
           ],
         ),
       ),
@@ -70,8 +61,11 @@ class ItemHome extends StatelessWidget {
   Stack _buildImage(BuildContext context) {
     return Stack(children: [
       GestureDetector(
-        onTap: (){
-          Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ItemDetailScreen(item: item)));
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => ItemDetailScreen(
+                    item: item,
+                  )));
         },
         child: Container(
           height: 130,
