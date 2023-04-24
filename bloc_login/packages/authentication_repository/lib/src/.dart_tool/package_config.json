@@ -1,0 +1,20 @@
+{
+  "configVersion": 2,
+  "packages": [
+    {
+      "name": "very_good_analysis",
+      "rootUri": "file:///C:/Users/intern.tcviet1/AppData/Local/Pub/Cache/hosted/pub.dev/very_good_analysis-3.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "authentication_repository",
+      "rootUri": "../",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    }
+  ],
+  "generated": "2023-04-19T07:13:28.563160Z",
+  "generator": "pub",
+  "generatorVersion": "2.19.6"
+}

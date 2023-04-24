@@ -39,13 +39,7 @@ class ItemFavorite extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: ColorApp.cfMilk,
                     borderRadius: BorderRadius.circular(16)),
-                child: item.isFavorite == false
-                    ? const Icon(
-                        Icons.favorite_outline,
-                        size: 30,
-                        color: Colors.white,
-                      )
-                    : const Icon(
+                child: const Icon(
                         Icons.favorite,
                         size: 30,
                         color: Colors.red,

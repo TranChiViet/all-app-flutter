@@ -127,7 +127,7 @@ class CappuccinoTab extends StatelessWidget {
               mainAxisSpacing: 12,
               crossAxisSpacing: 12,
               // childAspectRatio: 3 / 5,
-              mainAxisExtent: 230,
+              mainAxisExtent: 250,
             ),
           );
         },
